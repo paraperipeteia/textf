@@ -33,3 +33,4 @@ export 'src/widgets/textf.dart';
 export 'src/widgets/textf_ext.dart';
 export 'src/widgets/textf_options.dart';
 export 'src/widgets/textf_options_data.dart';
+export 'src/widgets/textf_status_badge.dart';

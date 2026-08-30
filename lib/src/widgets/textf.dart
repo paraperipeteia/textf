@@ -22,6 +22,7 @@ import 'internal/textf_renderer.dart';
 /// * `~subscript~` for subscript text
 /// * `` `code` `` for `code` text
 /// * `[link text](url)` for [links](https://example.com)
+/// * `status::Ordered::` for a bold, colored, rounded status badge.
 /// * `{key}` placeholders for inserting [InlineSpan]s (e.g., WidgetSpan) via [placeholders].
 ///
 /// Links support nested formatting such as `[**bold** link](url)`.

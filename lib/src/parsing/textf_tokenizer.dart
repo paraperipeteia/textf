@@ -48,6 +48,26 @@ class TextfTokenizer {
     while (pos < length) {
       final int startPosInLoop = pos;
 
+      if (text.startsWith('status::', pos)) {
+        final statusStart = pos + 'status::'.length;
+        final statusEnd = text.indexOf('::', statusStart);
+        if (statusEnd > statusStart &&
+            !text.substring(statusStart, statusEnd).contains('\n') &&
+            !text.substring(statusStart, statusEnd).contains('\r')) {
+          addTextToken(textStart, pos);
+          tokens.add(
+            StatusToken(
+              text.substring(statusStart, statusEnd),
+              position: pos,
+              length: statusEnd + 2 - pos,
+            ),
+          );
+          pos = statusEnd + 2;
+          textStart = pos;
+          continue;
+        }
+      }
+
       // Using codeUnitAt directly avoids allocating a CodeUnits wrapper list.
       final int currentChar = text.codeUnitAt(pos);
 

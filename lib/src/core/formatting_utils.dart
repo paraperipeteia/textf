@@ -17,6 +17,8 @@ class FormattingUtils {
   /// Closing characters (], ), }) are NOT included because they are only
   /// significant if preceded by their opening counterparts.
   static bool hasFormatting(String text) {
+    if (text.contains('status::')) return true;
+
     for (int i = 0; i < text.length; i++) {
       final int char = text.codeUnitAt(i);
       if (char == kAsterisk ||
@@ -84,6 +86,9 @@ class FormattingUtils {
 
       if (token is TextToken) {
         buffer.write(token.value);
+        i++;
+      } else if (token is StatusToken) {
+        buffer.write(token.label);
         i++;
       } else if (token is FormatMarkerToken) {
         if (validPairs.containsKey(i)) {

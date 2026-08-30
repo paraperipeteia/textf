@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:textf/textf.dart';
 
 import 'pump_textf_widget.dart';
 
@@ -234,6 +235,13 @@ void main() {
       expect(boldSpan.style?.fontSize, defaultStyle.fontSize);
       // Verify bold was applied on top
       expect(boldSpan.style?.fontWeight, FontWeight.bold);
+    });
+
+    testWidgets('Renders status markup as a status badge', (tester) async {
+      await pumpTextfWidget(tester, data: 'status::Ordered::');
+
+      expect(find.byType(TextfStatusBadge), findsOneWidget);
+      expect(find.text('Ordered'), findsOneWidget);
     });
 
     testWidgets('Explicit style overrides DefaultTextStyle', (tester) async {

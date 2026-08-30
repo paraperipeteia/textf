@@ -25,6 +25,18 @@ final class TextToken extends TextfToken {
   String toString() => 'TextToken("$value" at $position)';
 }
 
+/// A status badge token such as `status::Ordered::`.
+final class StatusToken extends TextfToken {
+  /// Creates a status badge token.
+  const StatusToken(this.label, {required super.position, required super.length});
+
+  /// The text displayed inside the status badge.
+  final String label;
+
+  @override
+  String toString() => 'StatusToken("$label" at $position)';
+}
+
 /// The type of formatting a [FormatMarkerToken] represents.
 enum FormatMarkerType {
   /// Bold formatting: `**` or `__`

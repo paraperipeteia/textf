@@ -298,6 +298,8 @@ class _SpanBuildState {
       switch (token) {
         case TextToken(:final value):
           textBuffer.write(value);
+        case StatusToken(:final label):
+          textBuffer.write('status::$label::');
         case FormatMarkerToken(:final value):
           textBuffer.write(value);
         case LinkStartToken():

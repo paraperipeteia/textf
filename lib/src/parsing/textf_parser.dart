@@ -7,6 +7,7 @@ import '../models/textf_token.dart';
 import '../styling/textf_style_resolver.dart';
 import 'components/link_handler.dart';
 import 'components/placeholder_handler.dart';
+import '../widgets/textf_status_badge.dart';
 
 /// Parser for formatted text that converts formatting markers into styled text spans.
 ///
@@ -124,6 +125,19 @@ class TextfParser {
         continue;
       }
 
+      if (token is StatusToken) {
+        state.flushText();
+        state.spans.add(
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: TextfStatusBadge(label: token.label),
+          ),
+        );
+        i++;
+        continue;
+      }
+
       // Link Handling
       if (token is LinkStartToken) {
         // Attempt to process a link.
@@ -161,6 +175,8 @@ class TextfParser {
       switch (token) {
         case TextToken(:final value):
           state.textBuffer.write(value);
+        case StatusToken(:final label):
+          state.textBuffer.write('status::$label::');
         case FormatMarkerToken(:final value):
           state.textBuffer.write(value);
         case LinkStartToken():
