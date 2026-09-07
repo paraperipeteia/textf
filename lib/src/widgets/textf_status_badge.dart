@@ -14,7 +14,7 @@ class TextfStatusBadge extends StatelessWidget {
     final color = switch (label.trim().toLowerCase()) {
       'ordered' => colorScheme.primary,
       'received' || 'received / on hand' => colorScheme.secondary,
-      'cut' || 'loaded' => colorScheme.tertiary,
+      'cut' || 'loaded' || 'completed' => colorScheme.tertiary,
       'not set' || 'not ordered' => colorScheme.error,
       _ => colorScheme.primary,
     };
